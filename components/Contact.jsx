@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '../constants';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? import.meta.env.WEB3FORMS_ACCESS_KEY;
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const Contact = () => {

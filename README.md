@@ -29,12 +29,13 @@ server, and no tokens that expire.
 2. Copy `.env.example` to `.env` and set:
 
    ```
-   VITE_WEB3FORMS_ACCESS_KEY=your-key-here
+   WEB3FORMS_ACCESS_KEY=your-key-here
    ```
 
 3. On Vercel: **Project Settings → Environment Variables** → add
-   `VITE_WEB3FORMS_ACCESS_KEY` with the same value, then **redeploy**. Vite
-   inlines env values at build time, so a rebuild is required for changes.
+   `WEB3FORMS_ACCESS_KEY` (or `VITE_WEB3FORMS_ACCESS_KEY` — the code accepts both)
+   with the same value, then **redeploy**. Vite inlines env values at build time,
+   so a rebuild is required for changes.
 
 Without the key the form shows “Email service is not configured”.
 
