@@ -17,17 +17,26 @@ const Contact = () => {
   const [fieldErrors, setFieldErrors] = React.useState({});
 
   const validateField = (field, value) => {
+    const trimmed = value.trim();
     switch (field) {
       case 'name':
-        return value.trim() ? '' : 'Name is required';
+        if (!trimmed) return 'Name is required';
+        if (trimmed.length < 2) return 'Name must be at least 2 characters';
+        return '';
       case 'email': {
-        if (!value.trim()) return 'Email is required';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+        if (!trimmed) return 'Email is required';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed))
           return 'Enter a valid email address';
         return '';
       }
+      case 'subject':
+        if (!trimmed) return 'Subject is required';
+        if (trimmed.length < 2) return 'Subject must be at least 2 characters';
+        return '';
       case 'message':
-        return value.trim() ? '' : 'Message is required';
+        if (!trimmed) return 'Message is required';
+        if (trimmed.length < 10) return 'Message must be at least 10 characters';
+        return '';
       default:
         return '';
     }
