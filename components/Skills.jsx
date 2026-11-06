@@ -430,9 +430,8 @@ const Skills = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.2, type: 'spring', stiffness: 400, damping: 25 }}
           whileHover={{ y: -4 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 text-white border border-slate-800 shadow-xl hover:shadow-2xl hover:border-slate-700 transition-all duration-300 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
