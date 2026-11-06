@@ -1,0 +1,25 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgExt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgExt)"/>
+  <circle cx="720" cy="90" r="130" fill="#a855f7" opacity="0.15"/>
+  <g transform="translate(60, 100)">
+    <rect width="210" height="34" rx="17" fill="rgba(168, 85, 247, 0.15)" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="105" y="22" fill="#c084fc" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CHROME EXTENSIONS</text>
+    <text x="0" y="90" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="38" font-weight="800">Browser Automation Suite</text>
+    <text x="0" y="130" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="18">Workflow Automation &amp; Browser-Based Tools</text>
+    <g transform="translate(0, 170)">
+      <rect x="0" y="0" width="160" height="36" rx="8" fill="#1e1b4b" stroke="#3730a3"/>
+      <text x="80" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Chrome Extension API</text>
+      <rect x="175" y="0" width="140" height="36" rx="8" fill="#1e1b4b" stroke="#3730a3"/>
+      <text x="245" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">DOM Automation</text>
+      <rect x="330" y="0" width="110" height="36" rx="8" fill="#1e1b4b" stroke="#3730a3"/>
+      <text x="385" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">TypeScript</text>
+    </g>
+  </g>
+</svg>

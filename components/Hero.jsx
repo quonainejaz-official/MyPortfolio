@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { CONTACT_INFO, PERSONAL_INFO } from '../constants';
 import Typewriter from './Typewriter';
@@ -49,24 +49,34 @@ const Hero = () => {
             </h2>
 
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg leading-relaxed">
-              {PERSONAL_INFO.tagline} Experienced in building scalable front-end
-              solutions with React, Next.js, and React Native.
+              {PERSONAL_INFO.tagline} Experienced in building full-stack web, mobile, and cross-platform desktop applications.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-10">
               <a
                 href="#contact"
-                className="group flex items-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50"
+                className="group flex items-center px-7 py-3.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50"
               >
                 Let's Talk
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </a>
 
               <a
+                href="/Quonain_Ejaz_Resume.pdf"
+                download="Quonain_Ejaz_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 rounded-xl font-semibold transition-all shadow-md group"
+              >
+                <Download className="mr-2 h-5 w-5 group-hover:translate-y-0.5 transition-transform" />
+                Download CV
+              </a>
+
+              <a
                 href={CONTACT_INFO.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center px-8 py-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-xl font-semibold transition-all shadow-sm"
+                className="flex items-center px-6 py-3.5 bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-primary-500 dark:hover:border-primary-500 rounded-xl font-semibold transition-all shadow-sm"
               >
                 <Linkedin className="mr-2 h-5 w-5 text-[#0077b5]" />
                 LinkedIn
@@ -99,7 +109,6 @@ const Hero = () => {
               >
                 <FaWhatsapp className="h-6 w-6 text-[#25D366]" />
               </a>
-              {/* Add more socials if available */}
             </div>
           </motion.div>
 
@@ -118,9 +127,9 @@ const Hero = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent flex items-end p-8">
                 <div className="text-white">
-                  <p className="font-bold text-xl">Clean Code &</p>
+                  <p className="font-bold text-xl">Clean Code &amp; Scalable Systems</p>
                   <p className="font-light text-lg">
-                    Performance Optimization
+                    Full-Stack &amp; Cross-Platform Development
                   </p>
                 </div>
               </div>
@@ -138,10 +147,10 @@ const Hero = () => {
                 </div>
                 <div>
                   <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-                    Experience
+                    Professional Experience
                   </p>
                   <p className="text-xl font-bold text-slate-900 dark:text-white">
-                    1.5+ Years
+                    2+ Years
                   </p>
                 </div>
               </div>

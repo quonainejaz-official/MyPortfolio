@@ -1,0 +1,27 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgTauri" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgTauri)"/>
+  <circle cx="700" cy="80" r="140" fill="#34d399" opacity="0.15"/>
+  <g transform="translate(60, 100)">
+    <rect width="160" height="34" rx="17" fill="rgba(52, 211, 153, 0.15)" stroke="#34d399" stroke-width="1.5"/>
+    <text x="80" y="22" fill="#34d399" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">TAURI &amp; RUST</text>
+    <text x="0" y="90" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="38" font-weight="800">Cross-Platform Desktop App</text>
+    <text x="0" y="130" fill="#94a3b8" font-family="system-ui, -apple-system, sans-serif" font-size="18">High-Performance Native Desktop Solution</text>
+    <g transform="translate(0, 170)">
+      <rect x="0" y="0" width="85" height="36" rx="8" fill="#064e3b" stroke="#059669"/>
+      <text x="42" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Tauri</text>
+      <rect x="100" y="0" width="85" height="36" rx="8" fill="#064e3b" stroke="#059669"/>
+      <text x="142" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Rust</text>
+      <rect x="200" y="0" width="95" height="36" rx="8" fill="#064e3b" stroke="#059669"/>
+      <text x="247" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Vue.js</text>
+      <rect x="310" y="0" width="135" height="36" rx="8" fill="#064e3b" stroke="#059669"/>
+      <text x="377" y="23" fill="#cbd5e1" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" text-anchor="middle">Cross-Platform</text>
+    </g>
+  </g>
+</svg>

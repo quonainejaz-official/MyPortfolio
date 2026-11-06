@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { EDUCATION_DATA, PERSONAL_INFO } from '../constants';
-import { Award, GraduationCap } from 'lucide-react';
+import { Award, GraduationCap, Download, FileText } from 'lucide-react';
 
 const About = () => {
   return (
@@ -29,15 +29,38 @@ const About = () => {
           >
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
-                Turning complex problems into simple, beautiful designs.
+                Building scalable, production-grade web, mobile &amp; desktop applications.
               </h3>
             </div>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
               {PERSONAL_INFO.about}
             </p>
-            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              I am passionate about clean code, performance optimization, and building user-focused applications using modern web technologies. Whether it is a dynamic web dashboard or a smooth mobile app, I strive for excellence in every pixel.
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+              I am passionate about clean code, performance optimization, and building user-focused applications using modern stacks like React, Next.js, Node.js, PHP/Laravel, React Native, and cross-platform desktop development with Tauri and Rust.
             </p>
+
+            {/* Direct Download CV Button */}
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="/Quonain_Ejaz_Resume.pdf"
+                download="Quonain_Ejaz_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-all shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 cursor-pointer"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                Download CV (Latest PDF)
+              </a>
+              <a
+                href="/Quonain_Ejaz_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white rounded-xl font-semibold transition-all cursor-pointer"
+              >
+                <FileText className="mr-2 h-5 w-5 text-primary-500" />
+                View CV in Browser
+              </a>
+            </div>
           </motion.div>
 
           {/* Education Timeline */}
@@ -46,12 +69,12 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-2xl"
+            className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-100 dark:border-slate-800"
           >
             <div className="flex items-center mb-8">
               <GraduationCap className="w-8 h-8 text-primary-500 mr-3" />
               <h3 className="text-2xl font-bold text-slate-800 dark:text-white">
-                Education & Certs
+                Education &amp; Certifications
               </h3>
             </div>
 

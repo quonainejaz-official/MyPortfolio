@@ -1,31 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Menu, X, Moon, Sun, Code2, Download } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Moon,
+  Sun,
+  Code2,
+  Download,
+  User,
+  Briefcase,
+  Cpu,
+  Layers,
+  Send,
+  Sparkles,
+  ArrowRight,
+  Github,
+  Linkedin,
+  Mail,
+} from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import {
   motion,
   AnimatePresence,
   useScroll,
   useSpring,
-  useMotionTemplate,
-  useMotionValue,
 } from 'framer-motion';
-import { Resume } from './Resume';
+import { CONTACT_INFO } from '../constants';
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeHover, setActiveHover] = useState(null);
-  const componentRef = useRef(null);
-  const navRef = useRef(null);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove(event) {
-    const { currentTarget, clientX, clientY } = event;
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
+  const [activeSection, setActiveSection] = useState('home');
+  const [hoveredLink, setHoveredLink] = useState(null);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -34,317 +39,289 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     restDelta: 0.001,
   });
 
-  const handlePrint = () => {
-    if (typeof window === 'undefined') return;
-    const resumeNode = componentRef.current;
-    if (!resumeNode) return;
-
-    const printWindow = window.open(
-      '',
-      '_blank',
-      'noopener,noreferrer,width=900,height=650'
-    );
-    if (!printWindow) return;
-
-    const styles = Array.from(
-      document.querySelectorAll('link[rel="stylesheet"], style')
-    )
-      .map((el) => el.outerHTML)
-      .join('\n');
-
-    printWindow.document.open();
-    printWindow.document.write(`<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quonain_Ejaz_Resume</title>
-    ${styles}
-  </head>
-  <body style="margin:0;">
-    ${resumeNode.outerHTML}
-  </body>
-</html>`);
-    printWindow.document.close();
-
-    const triggerPrint = () => {
-      try {
-        printWindow.focus();
-        printWindow.print();
-      } finally {
-        printWindow.close();
-      }
-    };
-
-    printWindow.onload = () => {
-      setTimeout(triggerPrint, 50);
-    };
-    setTimeout(triggerPrint, 500);
-  };
+  const navLinks = [
+    { name: 'About', href: '#about', icon: User },
+    { name: 'Experience', href: '#experience', icon: Briefcase },
+    { name: 'Skills', href: '#skills', icon: Cpu },
+    { name: 'Projects', href: '#projects', icon: Layers },
+    { name: 'Contact', href: '#contact', icon: Send },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Simple active section detection
+      const sections = ['contact', 'projects', 'skills', 'experience', 'about'];
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom >= 200) {
+            setActiveSection(section);
+            return;
+          }
+        }
+      }
+      if (window.scrollY < 300) {
+        setActiveSection('home');
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   const handleNavClick = (href) => {
     setIsOpen(false);
-    setTimeout(() => {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 300);
-  };
-
-  const menuVariants = {
-    closed: {
-      opacity: 0,
-      height: 0,
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
-    open: {
-      opacity: 1,
-      height: 'auto',
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    closed: { opacity: 0, x: -16 },
-    open: { opacity: 1, x: 0 },
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <>
-      <motion.nav
-        ref={navRef}
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        onMouseMove={handleMouseMove}
-        className={`fixed w-full z-50 transition-all duration-300 group will-change-transform ${
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/80 dark:bg-dark-bg/90 backdrop-blur-md shadow-lg border-b border-slate-100 dark:border-slate-800'
-            : 'bg-transparent'
+            ? 'py-2.5 bg-white/80 dark:bg-slate-900/85 backdrop-blur-xl shadow-lg shadow-slate-900/5 dark:shadow-black/20 border-b border-slate-200/60 dark:border-slate-800/80'
+            : 'py-4 bg-transparent'
         }`}
       >
-        {/* Spotlight Effect */}
-        <motion.div
-          className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-          style={{
-            background: useMotionTemplate`
-              radial-gradient(
-                650px circle at ${mouseX}px ${mouseY}px,
-                rgba(14, 165, 233, 0.15),
-                transparent 80%
-              )
-            `,
-          }}
-        />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <motion.div
-            className="flex items-center space-x-2 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
             <motion.div
-              className="p-2 bg-gradient-to-tr from-primary-600 to-primary-400 rounded-lg shadow-lg shadow-primary-500/30"
-              whileHover={{ rotate: 10, scale: 1.1 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center gap-2.5 cursor-pointer group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Code2 className="h-6 w-6 text-white" />
+              <div className="relative p-2.5 rounded-xl bg-gradient-to-tr from-primary-600 via-primary-500 to-purple-600 text-white shadow-md shadow-primary-500/25 group-hover:shadow-primary-500/40 transition-shadow">
+                <Code2 className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">
+                  Quonain<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-purple-500">.dev</span>
+                </span>
+                <span className="text-[10px] font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-widest leading-none mt-1 hidden sm:block">
+                  Software Engineer
+                </span>
+              </div>
             </motion.div>
-            <span className="text-xl font-bold text-slate-800 dark:text-white relative overflow-hidden group-logo">
-              <span className="inline-block transition-transform duration-300 group-logo-hover:-translate-y-full">
-                Quonain
-              </span>
-              <span className="text-primary-500">.dev</span>
-            </span>
-          </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
-                onMouseEnter={() => setActiveHover(link.name)}
-                onMouseLeave={() => setActiveHover(null)}
-                className="relative px-4 py-2 text-slate-600 dark:text-slate-300 font-medium transition-colors rounded-lg group/link overflow-hidden"
-              >
-                {activeHover === link.name && (
-                  <motion.div
-                    layoutId="hoverBackground"
-                    className="absolute inset-0 bg-primary-50 dark:bg-primary-900/20 rounded-lg -z-10"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      type: 'spring',
-                      bounce: 0.2,
-                      duration: 0.6,
-                    }}
-                  />
-                )}
-
-                {/* Text Animation */}
-                <div className="relative overflow-hidden">
-                  <span className="block transition-transform duration-300 group-hover/link:-translate-y-full">
-                    {link.name}
-                  </span>
-                  <span className="absolute top-0 left-0 block translate-y-full transition-transform duration-300 group-hover/link:translate-y-0 text-primary-600 dark:text-primary-400">
-                    {link.name}
-                  </span>
-                </div>
-              </a>
-            ))}
-
-            <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-slate-200 dark:border-slate-700">
-              <motion.button
-                onClick={() => handlePrint()}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white rounded-lg shadow-lg shadow-primary-500/20 cursor-pointer overflow-hidden group/btn"
-              >
-                <motion.div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
-                <Download size={18} className="relative z-10" />
-                <span className="font-medium relative z-10">Resume</span>
-              </motion.button>
-
-              <motion.button
-                onClick={toggleDarkMode}
-                whileHover={{ scale: 1.1, rotate: 15 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-yellow-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer relative overflow-hidden"
-                aria-label="Toggle Dark Mode"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-current opacity-10 rounded-full"
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                />
-                <motion.div
-                  initial={false}
-                  animate={{ rotate: darkMode ? 180 : 0 }}
-                  transition={{ duration: 0.5, type: 'spring' }}
-                >
-                  {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                </motion.div>
-              </motion.button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <motion.button
-              onClick={toggleDarkMode}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-12 h-12 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-yellow-400 cursor-pointer"
-              aria-label="Toggle Dark Mode"
-            >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-            </motion.button>
-            <motion.button
-              onClick={() => setIsOpen(!isOpen)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-12 h-12 flex items-center justify-center text-slate-800 dark:text-white focus:outline-none cursor-pointer"
-              aria-label="Toggle Menu"
-            >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Scroll Progress Bar */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500 origin-left z-50"
-          style={{ scaleX }}
-        />
-
-        {/* Mobile Navigation Dropdown */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              className="absolute top-20 left-0 w-full md:hidden bg-white/95 dark:bg-dark-card/95 backdrop-blur-xl border-t dark:border-slate-700 shadow-xl overflow-hidden z-40"
-            >
-              <div className="px-4 pt-2 pb-6 space-y-2">
-                {navLinks.map((link) => (
-                  <motion.a
+            {/* Desktop Navigation Capsule */}
+            <nav className="hidden md:flex items-center p-1.5 rounded-full bg-slate-100/80 dark:bg-slate-800/70 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 shadow-inner">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.replace('#', '');
+                return (
+                  <a
                     key={link.name}
-                    variants={itemVariants}
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
                       handleNavClick(link.href);
                     }}
-                    className="block w-full px-3 py-4 text-base font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors relative overflow-hidden group/mobile-link cursor-pointer"
+                    onMouseEnter={() => setHoveredLink(link.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className={`relative px-4 py-2 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 flex items-center gap-1.5 cursor-pointer ${
+                      isActive
+                        ? 'text-primary-600 dark:text-primary-400'
+                        : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                    }`}
                   >
-                    <span className="relative z-10 transition-transform duration-300 group-hover/mobile-link:translate-x-2 inline-block pointer-events-none">
-                      {link.name}
-                    </span>
-                    <motion.div
-                      className="absolute inset-0 bg-primary-50 dark:bg-slate-800 origin-left pointer-events-none"
-                      initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{
-                        type: 'spring',
-                        bounce: 0,
-                        duration: 0.3,
-                      }}
-                    />
-                  </motion.a>
-                ))}
-                <motion.button
-                  variants={itemVariants}
-                  onClick={() => {
-                    setIsOpen(false);
-                    handlePrint();
-                  }}
-                  className="w-full text-left px-3 py-4 text-base font-medium text-primary-600 dark:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors flex items-center space-x-2"
+                    {/* Hover Capsule Highlight */}
+                    {hoveredLink === link.name && (
+                      <motion.div
+                        layoutId="navHoverCapsule"
+                        className="absolute inset-0 bg-white dark:bg-slate-700/80 rounded-full shadow-sm -z-10"
+                        transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                      />
+                    )}
+
+                    {/* Active Section Dot */}
+                    {isActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse"></span>
+                    )}
+
+                    <span>{link.name}</span>
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Action Buttons (Right) */}
+            <div className="hidden sm:flex items-center gap-3">
+              {/* Direct Resume Download Button */}
+              <a
+                href="/Quonain_Ejaz_Resume.pdf"
+                download="Quonain_Ejaz_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-primary-600 via-primary-500 to-purple-600 hover:from-primary-500 hover:to-purple-500 shadow-md shadow-primary-500/25 hover:shadow-primary-500/40 transition-all duration-300 hover:scale-105 active:scale-95 group overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                <Download size={15} className="relative z-10 group-hover:translate-y-0.5 transition-transform" />
+                <span className="relative z-10">Resume</span>
+              </a>
+
+              {/* Theme Toggle Button */}
+              <motion.button
+                onClick={toggleDarkMode}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm cursor-pointer"
+                aria-label="Toggle Theme"
+                title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              >
+                <motion.div
+                  key={darkMode ? 'sun' : 'moon'}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
                 >
-                  <Download size={18} />
-                  <span>Download Resume</span>
-                </motion.button>
+                  {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+                </motion.div>
+              </motion.button>
+            </div>
+
+            {/* Mobile Right Controls */}
+            <div className="flex sm:hidden items-center gap-2">
+              <motion.button
+                onClick={toggleDarkMode}
+                whileTap={{ scale: 0.9 }}
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-400"
+                aria-label="Toggle Theme"
+              >
+                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </motion.button>
+
+              <motion.button
+                onClick={() => setIsOpen(!isOpen)}
+                whileTap={{ scale: 0.9 }}
+                className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white cursor-pointer"
+                aria-label="Toggle Mobile Menu"
+              >
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </motion.button>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500 origin-left"
+          style={{ scaleX }}
+        />
+
+        {/* Mobile Dropdown Drawer */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden mx-4 mt-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xl overflow-hidden"
+            >
+              <div className="p-4 space-y-1.5">
+                {navLinks.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = activeSection === link.href.replace('#', '');
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(link.href);
+                      }}
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                        isActive
+                          ? 'bg-primary-50 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800/40'
+                          : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`p-2 rounded-lg ${
+                            isActive
+                              ? 'bg-primary-500 text-white'
+                              : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
+                          }`}
+                        >
+                          <Icon size={16} />
+                        </div>
+                        <span>{link.name}</span>
+                      </div>
+                      <ArrowRight size={14} className="opacity-40" />
+                    </a>
+                  );
+                })}
+
+                {/* Mobile Download Resume CTA */}
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-3">
+                  <a
+                    href="/Quonain_Ejaz_Resume.pdf"
+                    download="Quonain_Ejaz_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-primary-600 to-purple-600 shadow-lg shadow-primary-500/25 active:scale-95 transition-all"
+                  >
+                    <Download size={16} />
+                    <span>Download CV (Latest PDF)</span>
+                  </a>
+
+                  {/* Mobile Quick Socials */}
+                  <div className="flex items-center justify-center gap-3 pt-1 text-slate-500 dark:text-slate-400">
+                    <a
+                      href={CONTACT_INFO.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      aria-label="GitHub"
+                    >
+                      <Github size={18} />
+                    </a>
+                    <a
+                      href={CONTACT_INFO.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-[#0077b5] transition-colors"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin size={18} />
+                    </a>
+                    <a
+                      href="https://wa.me/923482449429"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-[#25D366] transition-colors"
+                      aria-label="WhatsApp"
+                    >
+                      <FaWhatsapp size={18} />
+                    </a>
+                    <a
+                      href={`mailto:${CONTACT_INFO.email}`}
+                      className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-primary-500 transition-colors"
+                      aria-label="Email"
+                    >
+                      <Mail size={18} />
+                    </a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-
-        <div className="hidden">
-          <Resume ref={componentRef} />
-        </div>
-      </motion.nav>
+      </header>
     </>
   );
 };
