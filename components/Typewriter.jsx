@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Typewriter = ({ text, speed = 100, pause = 2000, className = '' }) => {
+const Typewriter = ({ text, speed = 70, pause = 1500, className = '' }) => {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 

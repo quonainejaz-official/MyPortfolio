@@ -22,10 +22,10 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Summary Text */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
           >
             <div className="mb-6">
               <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100">
@@ -65,10 +65,10 @@ const About = () => {
 
           {/* Education Timeline */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
             className="ml-2 sm:ml-6 pl-6 sm:pl-8 bg-slate-50 dark:bg-slate-800/50 p-4 sm:p-8 rounded-2xl border border-slate-100 dark:border-slate-800"
           >
             <div className="flex items-center mb-4 sm:mb-8">
@@ -78,10 +78,10 @@ const About = () => {
               </h3>
             </div>
 
-            <div className="space-y-6 sm:space-y-8 border-l-2 border-slate-200 dark:border-slate-700 ml-3 sm:ml-6 pl-2 sm:pl-8">
+            <div className="space-y-6 sm:space-y-8 border-l-2 border-slate-200 dark:border-slate-700 ml-4 sm:ml-6">
               {EDUCATION_DATA.map((item) => (
-                <div key={item.id} className="relative">
-                  <span className="absolute -left-[30px] sm:-left-[39px] top-1 h-5 w-5 rounded-full bg-primary-500 border-4 border-white dark:border-slate-800"></span>
+                <div key={item.id} className="relative pl-6 sm:pl-8">
+                  <span className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-primary-500 border-2 border-white dark:border-slate-900 shadow-sm z-10"></span>
                   <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                     {item.degree}
                   </h4>

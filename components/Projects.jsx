@@ -39,24 +39,24 @@ const Projects = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.05,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: 0, y: 24, scale: 0.95 },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
         type: 'spring',
-        stiffness: 260,
-        damping: 20,
+        stiffness: 400,
+        damping: 25,
       },
     },
-    exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
+    exit: { opacity: 0, scale: 0.9, transition: { duration: 0.15 } },
   };
 
   return (
@@ -157,8 +157,8 @@ const Projects = () => {
                 animate="show"
                 exit="exit"
                 whileHover={{
-                  y: -10,
-                  transition: { type: 'spring', stiffness: 300, damping: 20 },
+                  y: -8,
+                  transition: { type: 'spring', stiffness: 400, damping: 25 },
                 }}
                 className="group relative bg-white dark:bg-dark-card rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-primary-500/10 dark:hover:shadow-primary-500/5 border border-slate-200/80 dark:border-slate-800 hover:border-primary-400/60 dark:hover:border-primary-500/60 transition-all duration-300 flex flex-col overflow-hidden"
               >

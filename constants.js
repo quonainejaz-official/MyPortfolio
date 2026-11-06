@@ -92,6 +92,96 @@ export const EDUCATION_DATA = [
   },
 ];
 
+export const CERTIFICATIONS_DATA = [
+  {
+    id: 1,
+    title: "Cloud Computing - Microsoft",
+    issuer: "Government of Pakistan — NAVTTC (PMYSD)",
+    provider: "Corvit Networks Pvt Ltd",
+    grade: "A+ Grade",
+    issueDate: "Dec 16, 2024",
+    duration: "15/07/2024 to 15/10/2024",
+    credentialId: "Sr. No. SOC-0892469 | Reg: P-24-892469",
+    image: "/mypics/CloudComputing_Navttac_Certification_2024.png",
+    featured: true,
+    badge: "Official NAVTTC Credential",
+    program: "Prime Minister's Youth Skills Development Program (PMYSD - Summer of Code)",
+    description:
+      "Successfully completed the intensive professional certification course in Microsoft Cloud Computing conducted by Corvit Networks under the Prime Minister's Youth Skills Development Program (NAVTTC), earning the highest distinction of A+ Grade.",
+    highlights: [
+      "Awarded top-tier A+ Grade distinction for outstanding practical & theoretical performance",
+      "In-depth hands-on experience with Microsoft Azure Cloud Infrastructure & VM lifecycle management",
+      "Configuration of Virtual Networks, Subnets, Network Security Groups (NSGs), and Cloud Routing",
+      "Accredited under UNEVOC Network, APACC (Asia Pacific Accreditation Cooperation), and ISO 17025",
+    ],
+    skills: [
+      "Microsoft Azure",
+      "Cloud Computing",
+      "Virtual Machines",
+      "Virtual Networking",
+      "Cloud Security & IAM",
+      "Server Deployment",
+    ],
+  },
+  {
+    id: 2,
+    title: "Microsoft Azure Administrator Associate",
+    issuer: "Microsoft Certified",
+    provider: "Microsoft Official",
+    grade: "Certified",
+    issueDate: "2024",
+    duration: "Completed 2024",
+    credentialId: "AZ-104 Associate Credential",
+    image: null,
+    featured: false,
+    badge: "Industry Standard",
+    program: "Microsoft Cloud Technical Certification",
+    description:
+      "Demonstrated subject-matter expertise in implementing, managing, and monitoring an organization's Microsoft Azure cloud environment, covering identity, governance, compute, storage, and virtual networks.",
+    highlights: [
+      "Manage Azure identities and governance (Microsoft Entra ID, RBAC, Subscriptions)",
+      "Deploy and manage compute resources (Azure VMs, containers, and serverless compute)",
+      "Configure and manage virtual networking, peering, and hybrid connectivity",
+      "Implement and manage scalable Azure cloud storage and automated backup solutions",
+    ],
+    skills: [
+      "Azure Administration",
+      "Cloud Governance",
+      "Storage Accounts",
+      "Virtual Networks",
+      "Identity (Entra ID)",
+    ],
+  },
+  {
+    id: 3,
+    title: "Fundamentals of Web Development",
+    issuer: "Bano Qabil Lahore",
+    provider: "Alkhidmat Foundation",
+    grade: "Completed",
+    issueDate: "June 2024",
+    duration: "Completed June 2024",
+    credentialId: "BQ-WEB-2024",
+    image: null,
+    featured: false,
+    badge: "Professional Training",
+    program: "Bano Qabil Youth Tech Initiative",
+    description:
+      "Comprehensive training in modern web development standards, modern JavaScript (ES6+), semantic HTML5, responsive layout architecture, and industry-standard web engineering best practices.",
+    highlights: [
+      "Modern JavaScript ES6+ principles, DOM manipulation, and asynchronous APIs",
+      "Responsive web architecture, CSS Grid, Flexbox, and mobile-first design",
+      "Clean coding practices, version control workflows, and project structuring",
+    ],
+    skills: [
+      "JavaScript (ES6+)",
+      "Web Development",
+      "HTML5 / CSS3",
+      "Responsive Design",
+      "Front-End Engineering",
+    ],
+  },
+];
+
 export const SKILL_CATEGORIES = [
   {
     title: "Frontend Development",

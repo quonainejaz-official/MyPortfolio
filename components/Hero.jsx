@@ -8,6 +8,7 @@ import {
   Mail,
   Sparkles,
   CheckCircle2,
+  MapPin,
 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { CONTACT_INFO, PERSONAL_INFO } from '../constants';
@@ -40,16 +41,16 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           {/* Left Text Content (7 cols on lg) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
             className="lg:col-span-7 w-full max-w-full"
           >
             {/* Live Availability Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1 }}
+              transition={{ duration: 0.35, delay: 0.05 }}
               className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-700/80 shadow-xs mb-6"
             >
               <span className="relative flex h-2.5 w-2.5">
@@ -155,7 +156,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
             className="lg:col-span-5 hidden lg:flex justify-center relative"
           >
             {/* Ambient Lighting Glow Behind the Card */}
@@ -171,16 +172,23 @@ const Hero = () => {
               />
 
               {/* Bottom Subtle Gradient Overlay Blended into the Picture */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex flex-col justify-end p-7">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-sky-400 mb-1">
-                  Crafted with Excellence
-                </span>
-                <p className="font-extrabold text-white text-xl leading-tight">
-                  Clean Code &amp; Scalable Systems
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/45 to-transparent flex flex-col justify-end p-6 sm:p-7">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-emerald-500/30 w-fit mb-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider">
+                    Software Engineer
+                  </span>
+                </div>
+                <h3 className="font-extrabold text-white text-2xl tracking-tight leading-tight">
+                  Quonain Ejaz
+                </h3>
+                <p className="text-xs sm:text-sm text-sky-300 font-medium mt-1">
+                  Full-Stack &amp; Cross-Platform Developer
                 </p>
-                <p className="text-xs text-slate-300 font-medium mt-1">
-                  Full-Stack &amp; Cross-Platform Development
-                </p>
+                <div className="flex items-center gap-1.5 text-xs text-slate-300 font-normal mt-1.5 opacity-90">
+                  <MapPin size={13} className="text-emerald-400 shrink-0" />
+                  <span>Lahore, Pakistan</span>
+                </div>
               </div>
             </div>
           </motion.div>

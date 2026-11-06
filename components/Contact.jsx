@@ -196,9 +196,10 @@ const Contact = () => {
           {/* Contact Form */}
           <motion.div
             ref={formRef}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
             className="bg-white dark:bg-dark-card p-8 md:p-10 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800"
           >
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
@@ -206,7 +207,7 @@ const Contact = () => {
             </h3>
             {success && (
               <div
-                className="mb-6 rounded-lg border border-green-200 bg-green-50 text-green-700 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-300 px-4 py-3 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300"
+                className="mb-6 rounded-lg border border-green-200 bg-green-50 text-green-700 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-300 px-4 py-3 flex items-start gap-3 transition-all duration-200 ease-out"
                 role="alert"
               >
                 <span className="mt-0.5">✅</span>
@@ -215,7 +216,7 @@ const Contact = () => {
             )}
             {error && (
               <div
-                className="mb-6 rounded-lg border border-red-200 bg-red-50 text-red-700 dark:border-red-900/40 dark:bg-red-900/20 dark:text-red-300 px-4 py-3 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300"
+                className="mb-6 rounded-lg border border-red-200 bg-red-50 text-red-700 dark:border-red-900/40 dark:bg-red-900/20 dark:text-red-300 px-4 py-3 flex items-start gap-3 transition-all duration-200 ease-out"
                 role="alert"
               >
                 <span className="mt-0.5">❌</span>

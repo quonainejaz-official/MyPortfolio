@@ -78,7 +78,7 @@ const Experience = () => {
         </motion.div>
 
         {/* Timeline Container */}
-        <div className="relative pl-4 sm:pl-10 border-l-2 border-slate-200 dark:border-slate-800 space-y-8 sm:space-y-12 ml-4 sm:ml-6">
+        <div className="relative border-l-2 border-slate-200 dark:border-slate-800 space-y-8 sm:space-y-12 ml-4 sm:ml-8">
           {EXPERIENCE_DATA.map((job, index) => {
             const colors = getBadgeColor(job.id);
             return (
@@ -87,19 +87,19 @@ const Experience = () => {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="relative group"
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="relative pl-6 sm:pl-10 group"
               >
                 {/* Timeline Pulsing Node (centered on the border line) */}
-                <div className="absolute -left-[9px] top-6 flex items-center justify-center pointer-events-none">
+                <div className="absolute -left-[9px] top-6 z-20 flex items-center justify-center pointer-events-none">
                   <span className={`absolute w-5 h-5 rounded-full ${colors.dot} opacity-40 animate-ping`}></span>
                   <span className={`relative w-4 h-4 rounded-full ${colors.dot} border-2 border-white dark:border-slate-900 shadow-md`}></span>
                 </div>
 
                 {/* Experience Card */}
                 <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                   className={`bg-white dark:bg-dark-card rounded-3xl p-6 sm:p-9 shadow-lg hover:shadow-2xl ${colors.glow} border border-slate-200/80 dark:border-slate-800 ${colors.borderHover} transition-all duration-300 relative overflow-hidden`}
                 >
                   {/* Subtle Top Gradient Line */}

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Menu,
   X,
@@ -16,6 +16,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  Award,
 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import {
@@ -34,8 +35,8 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 400,
+    damping: 35,
     restDelta: 0.001,
   });
 
@@ -44,6 +45,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     { name: 'Experience', href: '#experience', icon: Briefcase },
     { name: 'Skills', href: '#skills', icon: Cpu },
     { name: 'Projects', href: '#projects', icon: Layers },
+    { name: 'Certificates', href: '#certificates', icon: Award },
     { name: 'Contact', href: '#contact', icon: Send },
   ];
 
@@ -52,7 +54,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       setScrolled(window.scrollY > 20);
 
       // Simple active section detection
-      const sections = ['contact', 'projects', 'skills', 'experience', 'about'];
+      const sections = ['contact', 'certificates', 'projects', 'skills', 'experience', 'about'];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {

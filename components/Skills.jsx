@@ -292,8 +292,8 @@ const Skills = () => {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 whileHover={{
-                  y: -8,
-                  transition: { type: 'spring', stiffness: 300, damping: 20 },
+                  y: -6,
+                  transition: { type: 'spring', stiffness: 400, damping: 25 },
                 }}
                 className={`relative p-6 rounded-3xl bg-white dark:bg-dark-card border border-slate-200/80 dark:border-slate-800 ${pillar.borderHover} shadow-md hover:shadow-2xl transition-all duration-300 group flex flex-col overflow-hidden`}
               >
@@ -359,8 +359,8 @@ const Skills = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   whileHover={{
-                    y: -8,
-                    transition: { type: 'spring', stiffness: 300, damping: 20 },
+                    y: -6,
+                    transition: { type: 'spring', stiffness: 400, damping: 25 },
                   }}
                   className={`relative p-7 rounded-3xl bg-white dark:bg-dark-card border border-slate-200/80 dark:border-slate-800 ${category.borderColor} shadow-lg hover:shadow-2xl ${category.glowShadow} transition-all duration-300 flex flex-col group overflow-hidden`}
                 >
@@ -402,8 +402,8 @@ const Skills = () => {
                       return (
                         <motion.div
                           key={idx}
-                          whileHover={{ scale: 1.06, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
+                          whileHover={{ scale: 1.04, y: -1 }}
+                          whileTap={{ scale: 0.96 }}
                           className="group/chip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-50 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/70 dark:border-slate-700/70 hover:border-primary-400 dark:hover:border-primary-500 shadow-xs hover:shadow-md transition-all duration-200 cursor-default"
                         >
                           {SkillIcon && (
@@ -432,6 +432,7 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
           whileHover={{ y: -4 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 text-white border border-slate-800 shadow-xl hover:shadow-2xl hover:border-slate-700 transition-all duration-300 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
