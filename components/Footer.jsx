@@ -199,10 +199,10 @@ const Footer = () => {
             <span>&middot; All rights reserved.</span>
           </p>
 
-          <p className="flex items-center gap-1">
-            Built with
+          <p className="flex items-center gap-1 text-xs text-slate-500">
+            <span>Built with</span>
             <Heart size={13} className="text-rose-500 fill-rose-500 inline-block animate-pulse mx-0.5" />
-            using React, Vite &amp; Tailwind CSS
+            <span>using React, Vite &amp; Tailwind CSS</span>
           </p>
 
           {/* Back to top button */}
