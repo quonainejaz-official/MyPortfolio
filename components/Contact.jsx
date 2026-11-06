@@ -14,18 +14,39 @@ const Contact = () => {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(null);
   const [error, setError] = React.useState(null);
+  const [fieldErrors, setFieldErrors] = React.useState({});
+
+  const validateField = (field, value) => {
+    switch (field) {
+      case 'name':
+        return value.trim() ? '' : 'Name is required';
+      case 'email': {
+        if (!value.trim()) return 'Email is required';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+          return 'Enter a valid email address';
+        return '';
+      }
+      case 'message':
+        return value.trim() ? '' : 'Message is required';
+      default:
+        return '';
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { id, value } = e.target;
+    const msg = validateField(id, value);
+    setFieldErrors((prev) => ({ ...prev, [id]: msg }));
+  };
 
   const validate = () => {
-    if (!name.trim() || !email.trim() || !message.trim()) {
-      setError('Please fill in your name, email, and message.');
-      return false;
-    }
-    const emailOk = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(email);
-    if (!emailOk) {
-      setError('Please enter a valid email address.');
-      return false;
-    }
-    return true;
+    const next = {
+      name: validateField('name', name),
+      email: validateField('email', email),
+      message: validateField('message', message),
+    };
+    setFieldErrors(next);
+    return !next.name && !next.email && !next.message;
   };
 
   const handleSubmit = async (e) => {
@@ -196,9 +217,18 @@ const Contact = () => {
                     placeholder="John Doe"
                     className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (fieldErrors.name) setFieldErrors((p) => ({ ...p, name: '' }));
+                    }}
+                    onBlur={handleBlur}
                     required
                   />
+                  {fieldErrors.name && (
+                    <span className="text-red-500 dark:text-red-400 text-xs mt-1 block">
+                      {fieldErrors.name}
+                    </span>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <label
@@ -214,9 +244,18 @@ const Contact = () => {
                     placeholder="john@example.com"
                     className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (fieldErrors.email) setFieldErrors((p) => ({ ...p, email: '' }));
+                    }}
+                    onBlur={handleBlur}
                     required
                   />
+                  {fieldErrors.email && (
+                    <span className="text-red-500 dark:text-red-400 text-xs mt-1 block">
+                      {fieldErrors.email}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -252,9 +291,18 @@ const Contact = () => {
                   placeholder="Tell me about your project..."
                   className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none"
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                    if (fieldErrors.message) setFieldErrors((p) => ({ ...p, message: '' }));
+                  }}
+                  onBlur={handleBlur}
                   required
                 ></textarea>
+                {fieldErrors.message && (
+                  <span className="text-red-500 dark:text-red-400 text-xs mt-1 block">
+                    {fieldErrors.message}
+                  </span>
+                )}
               </div>
 
               <button
