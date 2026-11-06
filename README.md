@@ -1,6 +1,6 @@
 # Quonain Ejaz - Portfolio
 
-**GitHub Repository:** https://github.com/Konainejaz/quonain-ejaz---portfolio
+**GitHub Repository:** [https://github.com/Konainejaz/quonain-ejaz---portfolio](https://github.com/quonainejaz-official/MyPortfolio)
 
 ## Run Locally
 
