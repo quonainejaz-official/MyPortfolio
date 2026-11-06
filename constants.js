@@ -211,6 +211,29 @@ export const CERTIFICATIONS_DATA = [
       "Artificial Intelligence",
     ],
   },
+  {
+    id: 5,
+    title: "Git Essential Training (2023)",
+    issuer: "LinkedIn Learning",
+    provider: "LinkedIn",
+    grade: "Completed",
+    issueDate: "May 28, 2025",
+    duration: "Self-paced (2023)",
+    credentialId: "Certificate of Completion: Git Essential Training",
+    image: "/certificates/Git_Essential_Training_2025.png",
+    featured: false,
+    badge: "LinkedIn Learning",
+    program: "Git Essential Training (2023)",
+    description:
+      "Completed essential training in Git version control, covering repository management, branching strategies, merge conflict resolution, and collaborative workflows using GitHub.",
+    highlights: [
+      "Git fundamentals: repositories, commits, branches, and merges",
+      "Collaborative workflows with pull requests and code reviews",
+      "Version control best practices for team-based development",
+      "Hands-on practice with GitHub remote repositories",
+    ],
+    skills: ["Git", "GitHub", "Version Control", "Branching", "Collaboration"],
+  },
 ];
 
 export const SKILL_CATEGORIES = [
