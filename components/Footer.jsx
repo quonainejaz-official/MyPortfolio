@@ -196,7 +196,7 @@ const Footer = () => {
           <p className="flex items-center gap-1.5 text-center sm:text-left">
             <span>&copy; {new Date().getFullYear()}</span>
             <span className="font-semibold text-slate-300">{PERSONAL_INFO.name}</span>
-            <span>Â· All rights reserved.</span>
+            <span>&middot; All rights reserved.</span>
           </p>
 
           <p className="flex items-center gap-1">
