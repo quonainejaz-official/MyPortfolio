@@ -35,10 +35,10 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg transition-colors duration-300 selection:bg-primary-500 selection:text-white">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-gray-50 dark:bg-dark-bg transition-colors duration-300 selection:bg-primary-500 selection:text-white">
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
-      <main>
+      <main className="w-full max-w-full overflow-x-hidden">
         <Hero />
         <About />
         <Experience />

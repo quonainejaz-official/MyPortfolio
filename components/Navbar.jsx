@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import {
   Menu,
   X,
@@ -83,7 +83,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 w-full max-w-full z-50 transition-all duration-300 ${
           scrolled
             ? 'py-2.5 bg-white/80 dark:bg-slate-900/85 backdrop-blur-xl shadow-lg shadow-slate-900/5 dark:shadow-black/20 border-b border-slate-200/60 dark:border-slate-800/80'
             : 'py-4 bg-transparent'
@@ -327,3 +327,4 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 };
 
 export default Navbar;
+

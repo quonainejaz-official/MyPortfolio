@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Code2,
@@ -36,7 +36,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-slate-950 text-slate-300 overflow-hidden border-t border-slate-800">
+    <footer className="relative bg-slate-950 text-slate-300 overflow-hidden border-t border-slate-800 w-full max-w-full">
       {/* Top Colorful Accent Line */}
       <div className="h-[2px] w-full bg-gradient-to-r from-primary-500 via-purple-500 to-pink-500"></div>
 
@@ -44,8 +44,8 @@ const Footer = () => {
       <div className="absolute top-0 left-1/4 -mt-24 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 -mb-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-12 relative z-10 w-full overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 pb-12 border-b border-slate-800/80">
           {/* Column 1: Brand & Value (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             <div
@@ -195,7 +195,7 @@ const Footer = () => {
           <p className="flex items-center gap-1.5 text-center sm:text-left">
             <span>&copy; {new Date().getFullYear()}</span>
             <span className="font-semibold text-slate-300">{PERSONAL_INFO.name}</span>
-            <span>· All rights reserved.</span>
+            <span>Â· All rights reserved.</span>
           </p>
 
           <p className="flex items-center gap-1">
@@ -220,3 +220,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

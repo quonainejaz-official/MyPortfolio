@@ -49,9 +49,9 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-24 bg-slate-50/70 dark:bg-slate-900/60 relative overflow-hidden">
+    <section id="experience" className="py-16 sm:py-24 bg-slate-50/70 dark:bg-slate-900/60 relative overflow-hidden w-full max-w-full">
       {/* Background Ambience */}
-      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -78,22 +78,22 @@ const Experience = () => {
         </motion.div>
 
         {/* Timeline Container */}
-        <div className="relative pl-6 sm:pl-10 border-l-2 border-slate-200 dark:border-slate-800 space-y-12 ml-2 sm:ml-4">
+        <div className="relative pl-4 sm:pl-10 border-l-2 border-slate-200 dark:border-slate-800 space-y-8 sm:space-y-12 ml-4 sm:ml-6">
           {EXPERIENCE_DATA.map((job, index) => {
             const colors = getBadgeColor(job.id);
             return (
               <motion.div
                 key={job.id}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
                 className="relative group"
               >
-                {/* Timeline Pulsing Node */}
-                <div className="absolute -left-[31px] sm:-left-[47px] top-6 flex items-center justify-center">
+                {/* Timeline Pulsing Node (centered on the border line) */}
+                <div className="absolute -left-[9px] top-6 flex items-center justify-center pointer-events-none">
                   <span className={`absolute w-5 h-5 rounded-full ${colors.dot} opacity-40 animate-ping`}></span>
-                  <span className={`relative w-4 h-4 rounded-full ${colors.dot} border-4 border-white dark:border-slate-900 shadow-md`}></span>
+                  <span className={`relative w-4 h-4 rounded-full ${colors.dot} border-2 border-white dark:border-slate-900 shadow-md`}></span>
                 </div>
 
                 {/* Experience Card */}
@@ -142,7 +142,7 @@ const Experience = () => {
                   </p>
 
                   {/* Key Achievements Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     {job.achievements.map((achievement, idx) => (
                       <div
                         key={idx}

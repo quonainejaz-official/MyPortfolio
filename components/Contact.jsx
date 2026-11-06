@@ -110,7 +110,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900 w-full max-w-full">
+    <section id="contact" className="py-16 sm:py-24 bg-slate-50 dark:bg-slate-900 w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -223,7 +223,7 @@ const Contact = () => {
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-2">
                   <label
                     htmlFor="name"
