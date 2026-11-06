@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight,
   Download,
@@ -14,7 +14,36 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { CONTACT_INFO, PERSONAL_INFO } from '../constants';
 import Typewriter from './Typewriter';
 
+const HERO_SLIDES = [
+  {
+    src: '/mypics/Portait.png',
+    alt: 'Quonain Ejaz - Formal Portrait',
+  },
+  {
+    src: '/mypics/Professional_Portrait.png',
+    alt: 'Quonain Ejaz - Professional Portrait',
+  },
+  {
+    src: '/mypics/slider.png',
+    alt: 'Quonain Ejaz - Workspace Portrait',
+  },
+];
+
 const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 2600);
+    return () => clearInterval(timer);
+  }, [isPaused, nextSlide]);
   return (
     <section
       id="home"
@@ -165,34 +194,65 @@ const Hero = () => {
             {/* Layer 2: Mid Glow Ring */}
             <div className="absolute inset-0 rounded-[3rem] p-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-sky-400 mask-[linear-gradient(90deg,transparent,black,transparent)] -mask-composite-source-out pointer-events-none opacity-60"></div>
 
-            {/* Rotated & Crafted Card Frame */}
-            <div className="relative w-full max-w-[520px] h-[620px] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/60 dark:border-slate-800 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out bg-slate-900 group relative z-10">
+            {/* Rotated & Crafted Card Frame with Slideshow */}
+            <div
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              className="relative w-full max-w-[410px] h-[495px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/70 dark:border-slate-800 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out bg-slate-900 group relative z-10 select-none"
+            >
               {/* Inner subtle frame stroke */}
-              <div className="absolute inset-0 rounded-[2.8rem] border border-white/10 dark:border-slate-700/40 pointer-events-none"></div>
+              <div className="absolute inset-0 rounded-[1.4rem] border border-white/10 dark:border-slate-700/40 pointer-events-none z-30"></div>
 
-              {/* Portrait Photo */}
-              <img
-                src="/mypics/Professional_Portrait.png"
-                alt="Quonain Ejaz - Professional Portrait"
-                className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-105"
-              />
+              {/* Minimal Top Dots Indicator (No count, no arrows) */}
+              <div className="absolute top-3.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+                <div className="flex items-center gap-1.5 p-1 px-2.5 rounded-full bg-slate-950/50 backdrop-blur-md border border-white/10 pointer-events-auto">
+                  {HERO_SLIDES.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentSlide(idx)}
+                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        currentSlide === idx
+                          ? 'w-5 bg-gradient-to-r from-primary-400 to-sky-400 shadow-xs'
+                          : 'w-1.5 bg-white/40 hover:bg-white/70'
+                      }`}
+                      aria-label={`Slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Slides Container with Fast & Buttery-Smooth Crossfade */}
+              <div className="relative w-full h-full overflow-hidden">
+                <AnimatePresence initial={false}>
+                  <motion.img
+                    key={currentSlide}
+                    src={HERO_SLIDES[currentSlide].src}
+                    alt={HERO_SLIDES[currentSlide].alt}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.55, ease: 'easeInOut' }}
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
+                </AnimatePresence>
+              </div>
 
               {/* Bottom Subtle Gradient Overlay Blended into the Picture */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-8 sm:p-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-emerald-500/40 w-fit mb-3">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span className="text-[12px] font-bold text-emerald-400 uppercase tracking-wider">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-6 sm:p-7 z-20 pointer-events-none">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-emerald-500/40 w-fit mb-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">
                     Software Engineer
                   </span>
                 </div>
-                <h3 className="font-black text-white text-3xl sm:text-4xl tracking-tight leading-tight">
+                <h3 className="font-extrabold text-white text-2xl sm:text-3xl tracking-tight leading-tight">
                   Quonain Ejaz
                 </h3>
-                <p className="text-sm sm:text-base text-sky-300 font-medium mt-1.5">
+                <p className="text-xs sm:text-sm text-sky-300 font-medium mt-1">
                   Full-Stack &amp; Cross-Platform Developer
                 </p>
-                <div className="flex items-center gap-2 text-sm text-slate-300 font-normal mt-2.5 opacity-90">
-                  <MapPin size={15} className="text-emerald-400 shrink-0" />
+                <div className="flex items-center gap-1.5 text-xs text-slate-300 font-normal mt-2 opacity-90">
+                  <MapPin size={14} className="text-emerald-400 shrink-0" />
                   <span>Lahore, Pakistan</span>
                 </div>
               </div>
