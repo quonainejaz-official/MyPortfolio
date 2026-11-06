@@ -1,11 +1,10 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '../constants';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const Contact = () => {
   const [name, setName] = React.useState('');
@@ -34,25 +33,39 @@ const Contact = () => {
     setSuccess(null);
     setError(null);
     if (!validate()) return;
-    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+    if (!WEB3FORMS_ACCESS_KEY) {
       setError(
-        'Email service is not configured. Please set VITE_EMAILJS_* env variables.'
+        'Email service is not configured. Please set VITE_WEB3FORMS_ACCESS_KEY.'
       );
       return;
     }
     setLoading(true);
     try {
-      const { default: emailjs } = await import('@emailjs/browser');
-      const templateParams = {
-        from_name: name,
-        from_email: email,
-        subject: subject || 'New message from portfolio',
-        message,
-      };
-
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, {
-        publicKey: PUBLIC_KEY,
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: subject || 'New message from portfolio',
+          from_name: name,
+          name,
+          email,
+          replyto: email,
+          message,
+          botcheck: false,
+        }),
       });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message || `Request failed with status ${response.status}`
+        );
+      }
 
       setSuccess("Thanks! Your message has been sent. I'll get back to you soon.");
       setName('');
@@ -60,6 +73,7 @@ const Contact = () => {
       setSubject('');
       setMessage('');
     } catch (err) {
+      console.error('Contact form error:', err);
       setError(
         'Sorry, something went wrong while sending your message. Please try again later.'
       );
@@ -69,8 +83,8 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900 w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +141,7 @@ const Contact = () => {
                 </p>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="inline-flex text-lg font-medium text-slate-700 dark:text-slate-200 hover:text-primary-600 transition-colors whitespace-nowrap leading-tight"
+                  className="inline-flex text-lg font-medium text-slate-700 dark:text-slate-200 hover:text-primary-600 transition-colors break-words leading-tight"
                 >
                   {CONTACT_INFO.phone}
                 </a>
@@ -262,3 +276,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
