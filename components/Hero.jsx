@@ -154,39 +154,45 @@ const Hero = () => {
 
           {/* Right Visual: Crafted, Blended Portrait Frame (5 cols on lg) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.45, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-5 hidden lg:flex justify-center relative"
           >
-            {/* Ambient Lighting Glow Behind the Card */}
-            <div className="absolute -inset-2 bg-gradient-to-tr from-primary-500/25 via-purple-500/20 to-sky-400/20 rounded-3xl blur-2xl transform rotate-3 scale-95 pointer-events-none"></div>
+            {/* Layer 1: Wide Ambient Glow Behind Card */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary-500/20 via-purple-500/15 to-sky-400/15 rounded-[3rem] blur-[120px] transform rotate-3 pointer-events-none"></div>
+
+            {/* Layer 2: Mid Glow Ring */}
+            <div className="absolute inset-0 rounded-[3rem] p-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-sky-400 mask-[linear-gradient(90deg,transparent,black,transparent)] -mask-composite-source-out pointer-events-none opacity-60"></div>
 
             {/* Rotated & Crafted Card Frame */}
-            <div className="relative w-full max-w-[390px] h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 transform rotate-3 hover:rotate-0 transition-transform duration-700 ease-out bg-slate-900 group">
+            <div className="relative w-full max-w-[520px] h-[620px] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white/60 dark:border-slate-800 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out bg-slate-900 group relative z-10">
+              {/* Inner subtle frame stroke */}
+              <div className="absolute inset-0 rounded-[2.8rem] border border-white/10 dark:border-slate-700/40 pointer-events-none"></div>
+
               {/* Portrait Photo */}
               <img
-                src="/mypics/Portait.png"
-                alt="Quonain Ejaz"
-                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                src="/mypics/Professional_Portrait.png"
+                alt="Quonain Ejaz - Professional Portrait"
+                className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-105"
               />
 
               {/* Bottom Subtle Gradient Overlay Blended into the Picture */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/45 to-transparent flex flex-col justify-end p-6 sm:p-7">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-emerald-500/30 w-fit mb-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent flex flex-col justify-end p-8 sm:p-10">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-emerald-500/40 w-fit mb-3">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[12px] font-bold text-emerald-400 uppercase tracking-wider">
                     Software Engineer
                   </span>
                 </div>
-                <h3 className="font-extrabold text-white text-2xl tracking-tight leading-tight">
+                <h3 className="font-black text-white text-3xl sm:text-4xl tracking-tight leading-tight">
                   Quonain Ejaz
                 </h3>
-                <p className="text-xs sm:text-sm text-sky-300 font-medium mt-1">
+                <p className="text-sm sm:text-base text-sky-300 font-medium mt-1.5">
                   Full-Stack &amp; Cross-Platform Developer
                 </p>
-                <div className="flex items-center gap-1.5 text-xs text-slate-300 font-normal mt-1.5 opacity-90">
-                  <MapPin size={13} className="text-emerald-400 shrink-0" />
+                <div className="flex items-center gap-2 text-sm text-slate-300 font-normal mt-2.5 opacity-90">
+                  <MapPin size={15} className="text-emerald-400 shrink-0" />
                   <span>Lahore, Pakistan</span>
                 </div>
               </div>
