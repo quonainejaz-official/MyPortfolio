@@ -41,22 +41,16 @@ const Contact = () => {
     }
     setLoading(true);
     try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+      if (!formData.get('subject')) {
+        formData.append('subject', 'New message from portfolio');
+      }
+
       const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: subject || 'New message from portfolio',
-          from_name: name,
-          name,
-          email,
-          replyto: email,
-          message,
-          botcheck: false,
-        }),
+        body: formData,
       });
 
       const data = await response.json().catch(() => ({}));
@@ -198,6 +192,7 @@ const Contact = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     placeholder="John Doe"
                     className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
                     value={name}
@@ -215,6 +210,7 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="john@example.com"
                     className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
                     value={email}
@@ -234,6 +230,7 @@ const Contact = () => {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
                   placeholder="Project Inquiry"
                   className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
                   value={subject}
@@ -250,6 +247,7 @@ const Contact = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
                   placeholder="Tell me about your project..."
                   className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none"
