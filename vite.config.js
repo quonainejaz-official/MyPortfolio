@@ -12,7 +12,22 @@ export default defineConfig(({ mode, isSsrBuild }) => {
       port: 5173,
       host: '0.0.0.0',
     },
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      {
+        // Static hosting (Vercel) has no server to fill in the SSR placeholder,
+        // so drop it from the built index.html. Dev SSR keeps it (ctx.server set).
+        name: 'strip-ssr-placeholder-for-static-build',
+        transformIndexHtml: {
+          order: 'post',
+          handler(html, ctx) {
+            if (ctx.server) return html;
+            return html.replace('<!--app-html-->', '');
+          },
+        },
+      },
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

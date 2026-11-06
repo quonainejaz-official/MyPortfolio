@@ -52,7 +52,12 @@ async function createServer() {
       }
 
       const appHtml = await render(url);
-      const html = template.replace('<!--app-html-->', appHtml);
+      const html = template.includes('<!--app-html-->')
+        ? template.replace('<!--app-html-->', appHtml)
+        : template.replace(
+            /<div id="root">[\s\S]*?<\/div>/,
+            () => `<div id="root">${appHtml}</div>`
+          );
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
