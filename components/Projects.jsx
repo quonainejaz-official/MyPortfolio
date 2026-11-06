@@ -11,6 +11,7 @@ import {
   Sparkles,
   ArrowUpRight,
 } from 'lucide-react';
+import { FaChrome, FaGooglePlay } from 'react-icons/fa';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -23,8 +24,14 @@ const Projects = () => {
     return true;
   });
 
-  const getCategoryIcon = (type) => {
-    switch (type) {
+  const getCategoryIcon = (project) => {
+    if (project.link?.includes('chromewebstore.google.com')) {
+      return <FaChrome size={12} className="text-amber-500" />;
+    }
+    if (project.link?.includes('play.google.com')) {
+      return <FaGooglePlay size={11} className="text-emerald-500" />;
+    }
+    switch (project.type) {
       case 'mobile':
         return <Smartphone size={13} className="text-emerald-500" />;
       case 'desktop':
@@ -32,6 +39,25 @@ const Projects = () => {
       default:
         return <Globe size={13} className="text-sky-500" />;
     }
+  };
+
+  const getProjectAction = (project) => {
+    if (project.link?.includes('chromewebstore.google.com')) {
+      return {
+        label: 'Chrome Web Store',
+        icon: <FaChrome className="w-3.5 h-3.5 ml-1.5 text-amber-400 group-hover/btn:scale-110 transition-transform" />,
+      };
+    }
+    if (project.link?.includes('play.google.com')) {
+      return {
+        label: 'Google Play Store',
+        icon: <FaGooglePlay className="w-3.5 h-3.5 ml-1.5 text-emerald-400 group-hover/btn:scale-110 transition-transform" />,
+      };
+    }
+    return {
+      label: 'View Project',
+      icon: <ExternalLink className="w-3.5 h-3.5 ml-1.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />,
+    };
   };
 
   const containerVariants = {
@@ -184,14 +210,26 @@ const Projects = () => {
 
                   {/* Floating Category Badge */}
                   <div className="absolute top-3.5 left-3.5 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-[11px] font-bold text-slate-800 dark:text-slate-200 shadow-md border border-white/20 dark:border-slate-700/50">
-                    {getCategoryIcon(project.type)}
+                    {getCategoryIcon(project)}
                     <span>{project.category}</span>
                   </div>
 
-                  {/* Project Index Watermark */}
-                  <div className="absolute top-3 right-4 z-10 text-xl font-black text-white/30 tracking-wider">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
+                  {/* Store Status Badge or Project Index Watermark */}
+                  {project.link?.includes('chromewebstore.google.com') ? (
+                    <div className="absolute top-3.5 right-3.5 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500 text-white backdrop-blur-md text-[10px] font-bold shadow-lg">
+                      <FaChrome size={11} />
+                      <span>Web Store Live</span>
+                    </div>
+                  ) : project.link?.includes('play.google.com') ? (
+                    <div className="absolute top-3.5 right-3.5 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-600 text-white backdrop-blur-md text-[10px] font-bold shadow-lg">
+                      <FaGooglePlay size={10} />
+                      <span>Play Store Live</span>
+                    </div>
+                  ) : (
+                    <div className="absolute top-3 right-4 z-10 text-xl font-black text-white/30 tracking-wider">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                  )}
 
                   {/* Hover Quick Action Indicator */}
                   {project.link && (
@@ -238,8 +276,8 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center flex-1 px-4 py-2.5 bg-slate-900 hover:bg-primary-600 dark:bg-white dark:hover:bg-primary-500 text-white dark:text-slate-900 dark:hover:text-white rounded-xl font-semibold text-xs transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-primary-500/25 group/btn"
                       >
-                        <span>View Project</span>
-                        <ExternalLink className="w-3.5 h-3.5 ml-1.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                        <span>{getProjectAction(project).label}</span>
+                        {getProjectAction(project).icon}
                       </a>
                     ) : null}
 

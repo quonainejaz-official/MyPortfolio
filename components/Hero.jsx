@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowRight,
   Download,
@@ -27,6 +27,10 @@ const HERO_SLIDES = [
     src: '/mypics/slider.png',
     alt: 'Quonain Ejaz - Workspace Portrait',
   },
+  {
+    src: '/mypics/slider2.png',
+    alt: 'Quonain Ejaz - Executive Portrait',
+  },
 ];
 
 const Hero = () => {
@@ -41,7 +45,7 @@ const Hero = () => {
     if (isPaused) return;
     const timer = setInterval(() => {
       nextSlide();
-    }, 2600);
+    }, 4200);
     return () => clearInterval(timer);
   }, [isPaused, nextSlide]);
   return (
@@ -189,16 +193,16 @@ const Hero = () => {
             className="lg:col-span-5 hidden lg:flex justify-center relative"
           >
             {/* Layer 1: Wide Ambient Glow Behind Card */}
-            <div className="absolute -inset-4 bg-gradient-to-tr from-primary-500/20 via-purple-500/15 to-sky-400/15 rounded-[3rem] blur-[120px] transform rotate-3 pointer-events-none"></div>
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary-500/20 via-purple-500/15 to-sky-400/15 rounded-3xl blur-[90px] pointer-events-none transition-transform duration-500 group-hover:scale-105"></div>
 
             {/* Layer 2: Mid Glow Ring */}
-            <div className="absolute inset-0 rounded-[3rem] p-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-sky-400 mask-[linear-gradient(90deg,transparent,black,transparent)] -mask-composite-source-out pointer-events-none opacity-60"></div>
+            <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-r from-primary-500 via-purple-500 to-sky-400 mask-[linear-gradient(90deg,transparent,black,transparent)] -mask-composite-source-out pointer-events-none opacity-60"></div>
 
-            {/* Rotated & Crafted Card Frame with Slideshow */}
+            {/* Crafted Card Frame with Slideshow (Straight normally, tilts on hover) */}
             <div
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
-              className="relative w-full max-w-[410px] h-[495px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/70 dark:border-slate-800 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out bg-slate-900 group relative z-10 select-none"
+              className="relative w-full max-w-[410px] h-[495px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/70 dark:border-slate-800 transform rotate-0 hover:rotate-2 hover:scale-[1.02] transition-all duration-500 ease-out bg-slate-900 group relative z-10 select-none"
             >
               {/* Inner subtle frame stroke */}
               <div className="absolute inset-0 rounded-[1.4rem] border border-white/10 dark:border-slate-700/40 pointer-events-none z-30"></div>
@@ -221,20 +225,28 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Slides Container with Fast & Buttery-Smooth Crossfade */}
-              <div className="relative w-full h-full overflow-hidden">
-                <AnimatePresence initial={false}>
-                  <motion.img
-                    key={currentSlide}
-                    src={HERO_SLIDES[currentSlide].src}
-                    alt={HERO_SLIDES[currentSlide].alt}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.55, ease: 'easeInOut' }}
-                    className="absolute inset-0 w-full h-full object-cover object-top"
-                  />
-                </AnimatePresence>
+              {/* Slides Container with Zero-Blink Buttery-Smooth Crossfade */}
+              <div className="relative w-full h-full overflow-hidden bg-slate-900">
+                {HERO_SLIDES.map((slide, idx) => {
+                  const isActive = currentSlide === idx;
+                  return (
+                    <div
+                      key={slide.src}
+                      className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                        isActive
+                          ? 'opacity-100 z-10'
+                          : 'opacity-0 z-0 pointer-events-none'
+                      }`}
+                    >
+                      <img
+                        src={slide.src}
+                        alt={slide.alt}
+                        className="w-full h-full object-cover object-top"
+                        loading="eager"
+                      />
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Bottom Subtle Gradient Overlay Blended into the Picture */}
