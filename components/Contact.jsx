@@ -7,6 +7,7 @@ const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? import
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const Contact = () => {
+  const formRef = React.useRef(null);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [subject, setSubject] = React.useState('');
@@ -96,18 +97,20 @@ const Contact = () => {
       setEmail('');
       setSubject('');
       setMessage('');
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (err) {
       console.error('Contact form error:', err);
       setError(
         'Sorry, something went wrong while sending your message. Please try again later.'
       );
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900 w-full max-w-full overflow-hidden">
+    <section id="contact" className="py-24 bg-slate-50 dark:bg-slate-900 w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -192,6 +195,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <motion.div
+            ref={formRef}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -201,13 +205,21 @@ const Contact = () => {
               Send Message
             </h3>
             {success && (
-              <div className="mb-4 rounded-lg border border-green-200 bg-green-50 text-green-700 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-300 px-4 py-3">
-                {success}
+              <div
+                className="mb-6 rounded-lg border border-green-200 bg-green-50 text-green-700 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-300 px-4 py-3 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300"
+                role="alert"
+              >
+                <span className="mt-0.5">✅</span>
+                <span>{success}</span>
               </div>
             )}
             {error && (
-              <div className="mb-4 rounded-lg border border-red-200 bg-red-50 text-red-700 dark:border-red-900/40 dark:bg-red-900/20 dark:text-red-300 px-4 py-3">
-                {error}
+              <div
+                className="mb-6 rounded-lg border border-red-200 bg-red-50 text-red-700 dark:border-red-900/40 dark:bg-red-900/20 dark:text-red-300 px-4 py-3 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300"
+                role="alert"
+              >
+                <span className="mt-0.5">❌</span>
+                <span>{error}</span>
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
