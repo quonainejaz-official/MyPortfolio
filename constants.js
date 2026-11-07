@@ -483,4 +483,23 @@ export const PROJECTS_DATA = [
     github: "https://github.com/quonainejaz-official/",
     image: "/projects/tauri-app.svg",
   },
+  {
+    id: 10,
+    title: "Q-Dev-AI — Intelligent Coding Assistant & Chatbot",
+    category: "Full-Stack AI App",
+    type: "web",
+    description:
+      "Full-stack AI assistant and developer copilot platform featuring real-time conversational streaming, chat history with instant search (Ctrl+K), AI image generation with interactive prompt editing, and Google OAuth 2.0 authentication. Deployed live on Vercel with responsive desktop and mobile interfaces.",
+    technologies: [
+      "JavaScript (ESM)",
+      "Node.js",
+      "AI LLM APIs",
+      "Google OAuth 2.0",
+      "Image Generation",
+      "Vercel",
+    ],
+    link: "https://ai.qdevsol.site/",
+    github: "https://github.com/quonainejaz-official/Q-Dev-AI.git",
+    image: "/projects/qdev-ai.png",
+  },
 ];
