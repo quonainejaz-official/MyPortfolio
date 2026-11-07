@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "node init && vite",
+    "build": "node init && vite build",
     "preview": "vite preview",
-    "dev:ssr": "node server.js",
-    "build:ssr": "vite build && vite build --ssr entry-server.jsx",
-    "start": "node --input-type=module -e \"process.env.NODE_ENV='production'; await import('./server.js')\""
+    "dev:ssr": "node init && node server.js",
+    "build:ssr": "node init && vite build && vite build --ssr entry-server.jsx",
+    "start": "node init && node --input-type=module -e \"process.env.NODE_ENV='production'; await import('./server.js')\""
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
